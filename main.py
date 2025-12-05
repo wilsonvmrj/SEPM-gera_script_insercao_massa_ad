@@ -47,7 +47,7 @@ def get_user_list_from_xlsx():
 
 def script_for_add_user_in_ad(user_dict):    
     """dsadd user cn="WIVIANE BÁRBARA DA SILVA SILVEIRA",OU=COP,OU=SEPM,DC=SEPM,DC=rj,DC=gov,DC=br,DC=local -samid "a110575" -upn "110575@SEPM.rj.gov.br.local" -fn "WIVIANE" -ln "BÁRBARA DA SILVA SILVEIRA" -display "WIVIANE BÁRBARA DA SILVA SILVEIRA" -email "barbarasilveira2406@gmail.com" -pwd "Abc12345" -disabled no """
-    line_script = f"""dsadd user cn="{user_dict['nome_completo']}",OU=COP,OU=SEPM,DC=SEPM,DC=rj,DC=gov,DC=br,DC=local -samid "a{user_dict['rg']}" -upn "{user_dict['rg']}@SEPM.rj.gov.br.local" -fn "{user_dict['first_name']}" -ln "{user_dict['last_name']}" -display "{user_dict['nome_completo']}" -email "{user_dict['email']}" -pwd "Abc12345" -disabled no """
+    line_script = f"""dsadd user cn="{user_dict['nome_completo']}",OU=COP,OU=SEPM,DC=SEPM,DC=rj,DC=gov,DC=br,DC=local -samid "a{user_dict['rg']}" -upn "{user_dict['rg']}@SEPM.rj.gov.br.local" -fn "{user_dict['first_name']}" -ln "{user_dict['last_name']}" -display "{user_dict['nome_completo']}" -email "{user_dict['email']}" -tel "{user_dict['tel']}" -desc "{user_dict['cpf']}" -pwd "Abc12345" -disabled no """
     print(line_script)
 
 
@@ -59,7 +59,7 @@ def script_for_add_user_in_ad(user_dict):
 
 
 def main():
-    print("Imprimindo lista de usuários:")
+    
     users_list = get_user_list_from_xlsx()
     for user_dict in users_list:
         script_for_add_user_in_ad(user_dict)
