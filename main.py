@@ -6,11 +6,14 @@ def split_name(full_name):
     last_name = delimiter.join(full_name_splited[1:])
     return  {'first_name':first_name, 'last_name':last_name}
 
-
+def clean_cpf(cpf):
+    cpf_novo = str(cpf).replace(".",'').replace('-','').strip()
+    return cpf_novo
+    
 
 def get_user_list_from_xlsx():
     import openpyxl
-    wb = openpyxl.load_workbook("users-ad.xlsx")
+    wb = openpyxl.load_workbook("Planilha-insercao-em-massa-4-cia.xlsx")
 
     planilha_nome = wb.sheetnames[0]
 
@@ -19,18 +22,24 @@ def get_user_list_from_xlsx():
     users_list = []
 
 
-    for row in planilha.values:
-        # print(row)
+    for row in planilha.values:        
+        if  not row[1]:
+            continue
+
+
+
 
 
         user_dict = {
-            'nome_completo': row[1],            
-            'rg':str(row[2]),
-            'cpf':row[3],
-            'id_funcional':str(row[4]),
-            'email':row[5],
-            'tel':str(row[6]),
+            'nome_completo': str(row[0]).upper(),            
+            'rg':str(row[1]),
+            'cpf':clean_cpf(row[2]),
+            'id_funcional':str(row[3]),
+            'email':str(row[4]).lower(),
+            'tel':str(row[5]),
         }
+
+        
 
 
         if user_dict.get('nome_completo') and user_dict.get('nome_completo') != "NOME COMPLETO" :
